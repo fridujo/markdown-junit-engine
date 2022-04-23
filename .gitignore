@@ -1,0 +1,6 @@
+# Maven
+target/
+
+# IJ
+.idea
+*.iml
