@@ -15,6 +15,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -96,8 +97,12 @@ public class CodeBlockCompilerVisitor extends AbstractVisitor implements Markdow
 
             JavaFileObject javaFileObject = new SourceMemoryJavaFileObject(markdownFilePath.toString(), source);
 
+            var targetDirectory = Paths.get("").resolve("target");
+            var containingFolder = targetDirectory.resolve("generated-markdown-classes");
+            var options = List.of("-d", containingFolder.toString());
+
             InMemoryDiagnosticListener diagnosticListener = new InMemoryDiagnosticListener();
-            if (!compiler.getTask(null, fileManager, diagnosticListener, List.of(), null, List.of(javaFileObject)).call()) {
+            if (!compiler.getTask(null, fileManager, diagnosticListener, options, null, List.of(javaFileObject)).call()) {
                 throw new AssertionFailedError("Compilation failed\n\n" + diagnosticListener.getDiagnostics().stream().map(Object::toString).collect(Collectors.joining("\n")));
             }
         }
