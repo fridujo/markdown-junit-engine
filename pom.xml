@@ -5,7 +5,7 @@
 
     <groupId>com.github.fridujo</groupId>
     <artifactId>markdown-junit-engine</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <description>JUnit Engine for Markdown-based tests</description>
     <url>https://github.com/fridujo/markdown-junit-engine</url>
