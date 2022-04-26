@@ -1,6 +1,5 @@
 package com.github.fridujo.markdown.junit.engine.visitor.provided;
 
-import com.github.fridujo.markdown.junit.engine.support.InMemoryDiagnosticListener;
 import com.github.fridujo.markdown.junit.engine.support.SourceMemoryJavaFileObject;
 import com.github.fridujo.markdown.junit.engine.visitor.*;
 import org.commonmark.node.AbstractVisitor;
@@ -9,10 +8,7 @@ import org.commonmark.node.Heading;
 import org.commonmark.node.Text;
 import org.opentest4j.AssertionFailedError;
 
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
+import javax.tools.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -101,7 +97,7 @@ public class CodeBlockCompilerVisitor extends AbstractVisitor implements Markdow
             var containingFolder = targetDirectory.resolve("generated-markdown-classes");
             var options = List.of("-d", containingFolder.toString());
 
-            InMemoryDiagnosticListener diagnosticListener = new InMemoryDiagnosticListener();
+            DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
             if (!compiler.getTask(null, fileManager, diagnosticListener, options, null, List.of(javaFileObject)).call()) {
                 throw new AssertionFailedError("Compilation failed\n\n" + diagnosticListener.getDiagnostics().stream().map(Object::toString).collect(Collectors.joining("\n")));
             }
