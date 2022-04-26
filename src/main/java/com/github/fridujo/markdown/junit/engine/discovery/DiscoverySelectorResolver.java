@@ -8,6 +8,7 @@ import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import org.junit.platform.engine.EngineDiscoveryRequest;
 import org.junit.platform.engine.TestDescriptor;
+import org.junit.platform.engine.discovery.ClassSelector;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -19,11 +20,13 @@ import java.util.stream.Stream;
 public class DiscoverySelectorResolver {
 
     private final Logger logger = LoggerFactory.getLogger(DiscoverySelectorResolver.class);
+    private final boolean uniqueClassSelector;
     private final boolean disableEngine;
     private final Path markdownFilesRootPath;
     private final MarkdownVisitorFactory markdownVisitorFactory;
 
     public DiscoverySelectorResolver(EngineDiscoveryRequest request) {
+        uniqueClassSelector = request.getSelectorsByType(ClassSelector.class).size() == 1;
         disableEngine = request
             .getConfigurationParameters()
             .get(MarkdownTestEngineProperties.DISABLED_PROPERTY_NAME)
@@ -44,6 +47,11 @@ public class DiscoverySelectorResolver {
     }
 
     public void resolveFor(TestDescriptor testDescriptor) {
+        if(uniqueClassSelector) {
+            // This is the behavior of the Surefire Maven plugin to call the discovery phase of each engine for each Java test file it detects
+            // These invocations are not relevant as they will not lead to nay execution of the current engine
+            return;
+        }
         if (disableEngine) {
             logger.info(() -> MarkdownTestEngineProperties.ENGINE_DISPLAY_NAME + " disabled");
             return;
