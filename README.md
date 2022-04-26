@@ -1,8 +1,8 @@
 # Markdown JUnit Engine
 JUnit Engine for Markdown-based tests.
 
-![build](https://github.com/ledoyen/markdown-junit-engine/actions/workflows/build.yml/badge.svg)
-[![codecov](https://codecov.io/gh/ledoyen/markdown-junit-engine/branch/main/graph/badge.svg?token=TJHCFMJBBK)](https://codecov.io/gh/ledoyen/markdown-junit-engine)
+![build](https://github.com/fridujo/markdown-junit-engine/actions/workflows/build.yml/badge.svg)
+[![codecov](https://codecov.io/gh/fridujo/markdown-junit-engine/branch/main/graph/badge.svg?token=TJHCFMJBBK)](https://codecov.io/gh/ledoyen/markdown-junit-engine)
 [![License](https://img.shields.io/github/license/fridujo/spring-automocker.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## Default behavior

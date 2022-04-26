@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <description>JUnit Engine for Markdown-based tests</description>
-    <url>https://github.com/ledoyen/markdown-junit-engine</url>
+    <url>https://github.com/fridujo/markdown-junit-engine</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +23,30 @@
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     </properties>
+
+    <scm>
+        <url>https://github.com/fridujo/markdown-junit-engine.git</url>
+        <connection>scm:git:ssh://git@github.com/fridujo/markdown-junit-engine.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/fridujo/markdown-junit-engine.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>ledoyen</id>
+            <name>Loïc Ledoyen</name>
+            <url>https://github.com/ledoyen</url>
+            <email>ledoyen.loic@gmail.com</email>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
