@@ -2,6 +2,7 @@
 JUnit Engine for Markdown-based tests.
 
 ![build](https://github.com/fridujo/markdown-junit-engine/actions/workflows/build.yml/badge.svg)
+[![JitPack](https://jitpack.io/v/fridujo/markdown-junit-engine.svg)](https://jitpack.io/#fridujo/markdown-junit-engine)
 [![codecov](https://codecov.io/gh/fridujo/markdown-junit-engine/branch/main/graph/badge.svg?token=TJHCFMJBBK)](https://codecov.io/gh/ledoyen/markdown-junit-engine)
 [![License](https://img.shields.io/github/license/fridujo/spring-automocker.svg)](https://opensource.org/licenses/Apache-2.0)
 
