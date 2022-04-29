@@ -20,4 +20,4 @@ The provided factory must return an implementation of `MarkdownVisitor` which wi
 * First, be notified of each Markdown AST element
 * Then, queried for `TestNode` to process as part of the JUnit execution tree
 
-A `TestNode` can either be a `ContainerNode` or a `NamedRunnable`.
+A `TestNode` can either be a `ContainerNode` or a `RunnableNode`.

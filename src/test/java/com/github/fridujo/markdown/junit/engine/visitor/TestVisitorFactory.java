@@ -17,10 +17,10 @@ public class TestVisitorFactory implements MarkdownVisitorFactory {
 
         @Override
         public Collection<TestNode> getCollectedTestNode() {
-            return List.of(new NamedRunnable("Test1", () -> {
-            }), new ContainerNode("Container2", List.of(new NamedRunnable("Test2.1", () -> {
+            return List.of(new RunnableNode("Test1", () -> {
+            }), new ContainerNode("Container2", List.of(new RunnableNode("Test2.1", () -> {
                 throw new RuntimeException("failure");
-            }), new NamedRunnable("Test2.2", () -> {
+            }), new RunnableNode("Test2.2", () -> {
             }))));
         }
     }

@@ -1,6 +1,6 @@
 package com.github.fridujo.markdown.junit.engine.visitor;
 
-public sealed interface TestNode permits ContainerNode, NamedRunnable {
+public sealed interface TestNode permits ContainerNode, RunnableNode {
 
     String name();
 

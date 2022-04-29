@@ -52,7 +52,7 @@ public class CodeBlockCompilerVisitor extends AbstractVisitor implements Markdow
         codeBlockSequence++;
         PathElement parentNode = nodePath.peekFirst();
         fencedCodeBlock.getSourceSpans();
-        NamedRunnable.Builder runnableNode = new NamedRunnable.Builder("Block#" + codeBlockSequence, new SourceCompilerRunnable(markdownFilePath, fencedCodeBlock.getLiteral().trim()));
+        RunnableNode.Builder runnableNode = new RunnableNode.Builder("Block#" + codeBlockSequence, new SourceCompilerRunnable(markdownFilePath, fencedCodeBlock.getLiteral().trim()));
         if (parentNode == null) {
             testNodes.add(runnableNode);
         } else {

@@ -25,7 +25,7 @@ public class CodeBlockDisplayVisitorFactory implements MarkdownVisitorFactory {
             if (!"java".equals(fencedCodeBlock.getInfo())) {
                 return;
             }
-            testNodes.add(new NamedRunnable("Block#" + blockSequence, () -> {
+            testNodes.add(new RunnableNode("Block#" + blockSequence, () -> {
                 System.out.println(fencedCodeBlock.getLiteral().trim());
             }));
         }
