@@ -13,7 +13,7 @@ public class SourceMemoryJavaFileObject extends SimpleJavaFileObject {
 
     private static final Logger logger = LoggerFactory.getLogger(SourceMemoryJavaFileObject.class);
 
-    private static final Pattern classNamePattern = Pattern.compile("(class|interface|record|annotation|@annotation)\\s+(?<className>[^\\s{]+)");
+    private static final Pattern classNamePattern = Pattern.compile("(class|interface|enum|record|annotation|@annotation)\\s+(?<className>[^\\s{]+)");
     private final String src;
 
     public SourceMemoryJavaFileObject(String prefix, String src) {
