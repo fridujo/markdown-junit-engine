@@ -47,9 +47,9 @@ public class DiscoverySelectorResolver {
     }
 
     public void resolveFor(TestDescriptor testDescriptor) {
-        if(uniqueClassSelector) {
+        if (uniqueClassSelector) {
             // This is the behavior of the Surefire Maven plugin to call the discovery phase of each engine for each Java test file it detects
-            // These invocations are not relevant as they will not lead to nay execution of the current engine
+            // These invocations are not relevant as they will not lead to any execution of the current engine
             return;
         }
         if (disableEngine) {
