@@ -1,6 +1,7 @@
 package com.github.fridujo.markdown.junit.engine.discovery;
 
 import com.github.fridujo.markdown.junit.engine.MarkdownTestEngineProperties;
+import com.github.fridujo.markdown.junit.engine.descriptor.FailingTestDescriptor;
 import com.github.fridujo.markdown.junit.engine.descriptor.MarkdownFileDescriptor;
 import com.github.fridujo.markdown.junit.engine.visitor.MarkdownVisitorFactory;
 import com.github.fridujo.markdown.junit.engine.visitor.provided.CodeBlockCompilerVisitor;
@@ -23,6 +24,7 @@ public class DiscoverySelectorResolver {
     private final boolean uniqueClassSelector;
     private final boolean disableEngine;
     private final Path markdownFilesRootPath;
+    private final boolean failOnMissingRootPath;
     private final MarkdownVisitorFactory markdownVisitorFactory;
 
     public DiscoverySelectorResolver(EngineDiscoveryRequest request) {
@@ -38,6 +40,12 @@ public class DiscoverySelectorResolver {
             .get(MarkdownTestEngineProperties.MARKDOWN_FILES_ROOT_PATH_PROPERTY_NAME)
             .map(Paths::get)
             .orElseGet(() -> Paths.get("doc")).toAbsolutePath();
+
+        failOnMissingRootPath = request
+            .getConfigurationParameters()
+            .get(MarkdownTestEngineProperties.FAIL_ON_MISSING_ROOT_PATH_PROPERTY_NAME)
+            .map(Boolean::parseBoolean)
+            .orElse(true);
 
         markdownVisitorFactory = request
             .getConfigurationParameters()
@@ -57,7 +65,12 @@ public class DiscoverySelectorResolver {
             return;
         }
         if (!Files.exists(markdownFilesRootPath)) {
-            logger.error(() -> "Markdown files root path " + markdownFilesRootPath + " does not exist");
+            String errorMessage = "Markdown files root path " + markdownFilesRootPath + " does not exist";
+            if (failOnMissingRootPath) {
+                testDescriptor.addChild(new FailingTestDescriptor(testDescriptor.getUniqueId(), errorMessage));
+            } else {
+                logger.warn(() -> errorMessage);
+            }
             return;
         }
 

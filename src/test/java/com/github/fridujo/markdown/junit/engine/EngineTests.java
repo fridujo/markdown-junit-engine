@@ -50,14 +50,28 @@ public class EngineTests {
     }
 
     @Test
-    void engine_executes_nothing_when_root_path_does_not_exist() {
+    void engine_executes_nothing_when_root_path_does_not_exist_and_fail_on_missing_root_path_is_disabled() {
+        EngineExecutionResults results = EngineTestKit
+            .engine("markdown")
+            .configurationParameter("markdown-junit-engine.disabled", "false") // override as by default engine is disabled in IDE
+            .configurationParameter("markdown-junit-engine.markdown-files-root-path", Paths.get("non-existing-folder").toString())
+            .configurationParameter("markdown-junit-engine.fail-on-missing-root-path", "false")
+            .execute();
+
+        results.testEvents().assertThatEvents().isEmpty();
+    }
+
+    @Test
+    void engine_produce_on_failing_test_when_root_path_does_not_exist() {
         EngineExecutionResults results = EngineTestKit
             .engine("markdown")
             .configurationParameter("markdown-junit-engine.disabled", "false") // override as by default engine is disabled in IDE
             .configurationParameter("markdown-junit-engine.markdown-files-root-path", Paths.get("non-existing-folder").toString())
             .execute();
 
-        results.testEvents().assertThatEvents().isEmpty();
+        results.testEvents().assertStatistics(
+            e -> e.started(1).failed(1)
+        );
     }
 
     @Test
