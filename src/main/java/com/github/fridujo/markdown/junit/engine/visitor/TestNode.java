@@ -13,5 +13,9 @@ public sealed interface TestNode permits ContainerNode, RunnableNode {
 
     interface Builder {
         TestNode build();
+
+        Type type();
+
+        String name();
     }
 }

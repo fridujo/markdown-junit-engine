@@ -10,8 +10,13 @@ public record RunnableNode(String name, Runnable runnable) implements TestNode {
     public record Builder(String name, Runnable runnable) implements TestNode.Builder {
 
         @Override
-            public RunnableNode build() {
-                return new RunnableNode(name, runnable);
-            }
+        public RunnableNode build() {
+            return new RunnableNode(name, runnable);
         }
+
+        @Override
+        public Type type() {
+            return Type.TEST;
+        }
+    }
 }

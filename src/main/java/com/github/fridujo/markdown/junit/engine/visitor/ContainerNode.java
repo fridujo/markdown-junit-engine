@@ -34,5 +34,15 @@ public record ContainerNode(String name, Collection<TestNode> children) implemen
         public ContainerNode build() {
             return new ContainerNode(name, children.stream().map(TestNode.Builder::build).collect(Collectors.toList()));
         }
+
+        @Override
+        public Type type() {
+            return TestNode.Type.CONTAINER;
+        }
+
+        @Override
+        public String name() {
+            return name;
+        }
     }
 }
