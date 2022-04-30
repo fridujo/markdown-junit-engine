@@ -32,7 +32,11 @@ public record ContainerNode(String name, Collection<TestNode> children) implemen
 
         @Override
         public ContainerNode build() {
-            return new ContainerNode(name, children.stream().map(TestNode.Builder::build).collect(Collectors.toList()));
+            List<TestNode> builtChildren = children.stream()
+                .map(TestNode.Builder::build)
+                .filter(tn -> !(tn.type() == Type.CONTAINER && ContainerNode.class.cast(tn).children.isEmpty()))
+                .collect(Collectors.toList());
+            return new ContainerNode(name, builtChildren);
         }
 
         @Override
