@@ -3,8 +3,8 @@ package com.github.fridujo.markdown.junit.engine.visitor;
 import org.commonmark.node.AbstractVisitor;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 public class TestVisitorFactory implements MarkdownVisitorFactory {
 
@@ -17,8 +17,8 @@ public class TestVisitorFactory implements MarkdownVisitorFactory {
 
         @Override
         public Collection<TestNode> getCollectedTestNode() {
-            return List.of(new RunnableNode("Test1", () -> {
-            }), new ContainerNode("Container2", List.of(new RunnableNode("Test2.1", () -> {
+            return Arrays.asList(new RunnableNode("Test1", () -> {
+            }), new ContainerNode("Container2", Arrays.asList(new RunnableNode("Test2.1", () -> {
                 throw new RuntimeException("failure");
             }), new RunnableNode("Test2.2", () -> {
             }))));
