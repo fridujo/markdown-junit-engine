@@ -1,13 +1,38 @@
 package com.github.fridujo.markdown.junit.engine.visitor;
 
-public record RunnableNode(String name, Runnable runnable) implements TestNode {
+public class RunnableNode implements TestNode {
+
+    private final String name;
+    private final Runnable runnable;
+
+    public RunnableNode(String name, Runnable runnable) {
+        this.name = name;
+        this.runnable = runnable;
+    }
+
+    @Override
+    public String name() {
+        return name;
+    }
 
     @Override
     public Type type() {
         return Type.TEST;
     }
 
-    public record Builder(String name, Runnable runnable) implements TestNode.Builder {
+    public Runnable runnable() {
+        return runnable;
+    }
+
+    public static class Builder implements TestNode.Builder {
+
+        private final String name;
+        private final Runnable runnable;
+
+        public Builder(String name, Runnable runnable) {
+            this.name = name;
+            this.runnable = runnable;
+        }
 
         @Override
         public RunnableNode build() {
@@ -17,6 +42,11 @@ public record RunnableNode(String name, Runnable runnable) implements TestNode {
         @Override
         public Type type() {
             return Type.TEST;
+        }
+
+        @Override
+        public String name() {
+            return name;
         }
     }
 }
